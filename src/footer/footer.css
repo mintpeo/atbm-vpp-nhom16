@@ -1,0 +1,147 @@
+#footer {
+  background: #134a04;
+}
+#footer .container {
+  background: #900002;
+  border-top-left-radius: 5rem;
+  border-top-right-radius: 5rem;
+  display: flex;
+  justify-content: space-between;
+  padding: 3rem 5rem 0;
+}
+#footer .container .title {
+  font-weight: bold;
+  color: #fbe263 !important;
+  font-size: 1rem;
+  margin-bottom: 10px;
+}
+#footer .container .list-item {
+  list-style: none;
+}
+#footer .container .list-item .item {
+  letter-spacing: 0.5px;
+  margin-bottom: 5px;
+}
+#footer .container .list-item .item a {
+  text-decoration: none;
+  color: #fff;
+}
+#footer .container .list-item .item:before {
+  content: "-";
+  margin-right: 5px;
+  color: #fff;
+}
+#footer .container .logo-footer {
+  width: 420px;
+}
+#footer .container .logo-footer img {
+  max-width: 280px;
+}
+#footer .container .logo-footer .about-company {
+  margin-top: 1rem;
+}
+#footer .container .logo-footer .about-company p {
+  font-size: 1rem;
+  color: #fff;
+  margin-bottom: 5px;
+  letter-spacing: 1px;
+}
+#footer .container .logo-footer .input-mail .mail {
+  width: 250px;
+  margin-top: 1rem;
+  padding: 0.8rem;
+  border-top-left-radius: 1rem;
+  border-bottom-left-radius: 1rem;
+  border: none;
+  font-size: 1rem;
+}
+#footer .container .logo-footer .input-mail .btn-input {
+  padding: 0.8rem;
+  border-top-right-radius: 1rem;
+  border-bottom-right-radius: 1rem;
+  background: #650000;
+  border: none;
+  font-size: 1rem;
+  color: #fff;
+  cursor: pointer;
+}
+#footer .container .logo-footer .input-mail .btn-input:hover {
+  filter: brightness(1.1);
+}
+#footer .container .logo-footer .line-parker {
+  margin: 1rem 0 5px;
+}
+#footer .container .logo-footer .line-parker a {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #fbe263;
+  text-transform: uppercase;
+  text-decoration: none;
+  font-size: 0.9rem;
+}
+#footer .container .logo-footer .line-parker a img {
+  width: 100px;
+}
+#footer .container .address {
+  width: 320px;
+  padding: 0 10px;
+}
+#footer .container .address p {
+  margin-bottom: 5px;
+  letter-spacing: 1px;
+  font-size: 0.9rem;
+  color: #fff;
+}
+#footer .container .address p b {
+  color: #fbe263;
+}
+#footer .container .contact {
+  width: 280px;
+  padding: 0 10px;
+}
+#footer .container .contact .font-contact {
+  font-weight: 600;
+  color: #fbe263;
+}
+#footer .container .contact p {
+  letter-spacing: 1px;
+  margin-bottom: 5px;
+}
+#footer .container .contact p a {
+  margin-left: 5px;
+  text-decoration: none;
+  color: #fff !important;
+}
+#footer .container .about {
+  width: 320px;
+  padding: 0 10px;
+}
+#footer .container .about .logo-about {
+  margin-top: 1rem;
+  display: flex;
+}
+#footer .container .about .logo-about .icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+  background-color: #fff;
+  margin-right: 8px;
+  font-size: 1.7rem;
+}
+#footer .footer-bottom {
+  background: #650000;
+  padding: 1rem;
+}
+#footer .footer-bottom p {
+  text-align: center;
+  color: #fff;
+  font-weight: 500;
+  font-size: 0.9rem;
+  letter-spacing: 1px;
+}
+
+/*# sourceMappingURL=footer.css.map */

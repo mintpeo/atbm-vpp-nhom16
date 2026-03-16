@@ -1,0 +1,182 @@
+@charset "UTF-8";
+#cart {
+  padding: 3rem;
+  background: #f1f1f1;
+}
+#cart .container {
+  padding: 1rem 2rem 0.3rem 2rem;
+  margin-bottom: 1rem;
+  box-shadow: 0 0 1.2rem 0 rgba(212, 217, 234, 0.45);
+  background: #fff;
+  border-radius: 1rem;
+}
+#cart .container .title {
+  font-weight: 500;
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+}
+#cart .container p {
+  font-size: 1.1rem;
+  margin-bottom: 1rem;
+}
+#cart .container .main-cart {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 1rem;
+  align-items: start; /* Giúp border chỉ ôm vừa đủ sản phẩm */
+}
+#cart .container .main-cart .container-left .list-cart {
+  display: flex;
+  gap: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 1rem;
+  padding: 1rem;
+  margin-bottom: 1rem;
+}
+#cart .container .main-cart .container-left .list-cart .item-img {
+  width: auto;
+  height: 5rem;
+}
+#cart .container .main-cart .container-left .list-cart .item-cart {
+  display: grid;
+  grid-template-columns: 2fr 2fr 0.5fr;
+  height: 5rem;
+  gap: 2rem;
+  padding: 1rem 0;
+  position: relative;
+  width: 100%;
+}
+#cart .container .main-cart .container-left .list-cart .item-cart .item-left {
+  text-align: left;
+}
+#cart .container .main-cart .container-left .list-cart .item-cart .item-left .name {
+  white-space: nowrap;
+  font-size: 1rem;
+  font-weight: 500;
+  margin-bottom: 0.3rem;
+}
+#cart .container .main-cart .container-left .list-cart .item-cart .item-left .name:hover {
+  color: #2659f3;
+}
+#cart .container .main-cart .container-left .list-cart .item-cart .item-left .type {
+  font-size: 0.8rem;
+  font-weight: 400;
+  color: #898989;
+}
+#cart .container .main-cart .container-left .list-cart .item-cart .item-middle {
+  display: flex;
+  gap: 1.5rem;
+}
+#cart .container .main-cart .container-left .list-cart .item-cart .item-middle .price-dis {
+  font-weight: 700;
+  font-size: 1rem;
+}
+#cart .container .main-cart .container-left .list-cart .item-cart .item-middle .price-noDis {
+  text-decoration: line-through;
+  font-size: 0.8rem;
+}
+#cart .container .main-cart .container-left .list-cart .item-cart .item-middle .price-percent {
+  text-align: center;
+  width: 3.5rem;
+  height: 18px;
+  background: #ff0000;
+  border-radius: 2rem;
+  color: #fff;
+}
+#cart .container .main-cart .container-left .list-cart .item-cart .item-right {
+  display: flex;
+  max-height: 2rem;
+}
+#cart .container .main-cart .container-left .list-cart .item-cart .item-right .btn {
+  padding: 0.4rem 0.8rem;
+  border: 1px solid #ced4da;
+  background: #fff;
+  border-radius: 4px 0 0 4px;
+  font-size: 1rem;
+  cursor: pointer;
+}
+#cart .container .main-cart .container-left .list-cart .item-cart .item-right .quantity {
+  text-align: center;
+  border-style: solid none;
+  padding: 0.4rem 1rem;
+  border-width: 1px;
+  border-color: #ced4da;
+}
+#cart .container .main-cart .container-left .list-cart .item-cart .btn-remove {
+  position: absolute;
+  right: 0;
+  top: 0;
+  margin-top: -0.5rem;
+  background: #000;
+  color: #fff;
+  border-radius: 100%;
+  width: 1.2rem;
+  height: 1.2rem;
+  cursor: pointer;
+}
+#cart .container .main-cart .container-right {
+  border: 1px solid #ccc;
+  border-radius: 1rem;
+  padding: 1rem;
+  height: 100%;
+}
+#cart .container .main-cart .container-right .total-price {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+#cart .container .main-cart .container-right .total-price .price {
+  font-weight: 700;
+  font-size: 1.1rem;
+}
+#cart .container .main-cart .container-right .note .title-note {
+  font-size: 1.1rem;
+  font-weight: 400;
+  margin-bottom: 0.5rem;
+}
+#cart .container .main-cart .container-right .note .title-note span {
+  color: red;
+}
+#cart .container .main-cart .container-right .note .input-note {
+  width: 100%;
+  height: 5rem;
+  border: 1px solid #e6e6e6;
+  margin-bottom: 1rem;
+  text-align: start;
+  padding: 1rem;
+  font-size: 0.9rem;
+  border-radius: 0.5rem;
+  resize: none;
+}
+#cart .container .main-cart .container-right .note .input-note:focus {
+  outline: none;
+}
+#cart .container .main-cart .container-right .note .btn-cart {
+  width: 100%;
+  background: #2659f3;
+  padding: 0.5rem;
+  border: none;
+  font-size: 1rem;
+  color: #fff;
+  border-radius: 0.5rem;
+  cursor: pointer;
+}
+#cart .container .main-cart .container-right .note .btn-cart:hover {
+  filter: brightness(1.2);
+}
+#cart .container .main-cart .free-ship {
+  display: flex;
+  gap: 0.5rem;
+  font-style: italic;
+}
+#cart .container .main-cart .free-ship i {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: blue;
+  width: 20px;
+  height: 20px;
+  scale: 1.2;
+}
+
+/*# sourceMappingURL=cart.css.map */

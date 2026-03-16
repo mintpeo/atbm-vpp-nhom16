@@ -1,0 +1,218 @@
+#check-out {
+  .container {
+    display: flex;
+    justify-content: center;
+    margin: 1rem 0;
+
+    .side-left {
+      border-style: none solid none none;
+      border-width: 1px;
+      border-color: #e1e1e1;
+      max-width: 40%;
+
+      .container-left {
+        margin-right: 2rem;
+
+        .logo {
+          margin-bottom: 1rem;
+        }
+
+        .info-checkout {
+          margin-bottom: 2rem;
+
+          .title {
+            font-weight: 600;
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+          }
+
+          .user {
+            display: flex;
+            margin-bottom: 1.2rem;
+
+            .icon {
+              width: 30px;
+              height: 30px;
+            }
+
+            .name {
+              color: #737373;
+
+              .log-out {
+                color: #000 !important;
+              }
+            }
+          }
+
+          .address {
+            .field-input {
+              width: 100%;
+              height: 3rem;
+              margin-bottom: 1rem;
+              padding: .2rem .5rem;
+              font-size: 1rem;
+
+              &:focus {
+                box-shadow: 0 0 0 2px #338dbc;
+                outline: none;
+              }
+            }
+
+            .select-address {
+              display: grid;
+              grid-template-columns: repeat(3, 1fr);
+              gap: 1rem;
+
+              .item-input {
+                //max-width: 30%;
+              }
+            }
+          }
+        }
+
+        .step-checkout {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+
+          a {
+            text-decoration: none;
+          }
+
+          .back-cart {
+            color: #000;
+          }
+
+          .btn-checkout {
+            background: #338dbc;
+            color: #fff;
+            padding: .5rem 3rem;
+            border: none;
+            font-size: 1rem;
+            cursor: pointer;
+
+            &:hover {
+              color: #fff;
+              filter: brightness(1.2);
+            }
+          }
+        }
+      }
+    }
+
+    .side-right {
+      margin-left: 2rem;
+      width: 25%;
+
+      .list-cart {
+        list-style: none;
+        max-height: 10rem;
+        overflow-y: auto;
+        margin-bottom: 1rem;
+        border-style: none none solid none;
+        border-width: 1px;
+        border-color: #e1e1e1;
+
+        .item-cart {
+          margin-bottom: 1rem;
+
+          .item-container {
+            display: flex;
+            gap: 1rem;
+
+            .item-img {
+              width: auto;
+              height: 4rem;
+            }
+
+            .item-info {
+              .type {
+                color: #969696;
+                font-size: .8rem;
+              }
+            }
+          }
+        }
+      }
+
+      .voucher {
+        border-style: none none solid none;
+        border-width: 1px;
+        border-color: #e1e1e1;
+        margin-bottom: 1rem;
+
+        .apply-voucher {
+          border: 1px dashed #4f95ff;
+          padding: 1rem;
+          display: flex;
+          gap: .5rem;
+
+          .input-voucher {
+            width: 70%;
+            height: 3rem;
+            padding: .5rem;
+            border: 1px solid #97c0ff;
+            box-shadow: none;
+
+            &:focus {
+              box-shadow: none;
+              outline: none;
+            }
+          }
+
+          .apply {
+            background: #338dbc;
+            border: none;
+            color: #fff;
+            width: 30%;
+            cursor: pointer;
+          }
+        }
+
+        .more-vouchers {
+          margin: 1rem 0 .5rem;
+          color: #FF232C;
+
+          .title {
+            display: flex;
+            margin-bottom: .5rem;
+
+            i {
+              display: flex;
+              align-items: center;
+              width: 20px;
+              height: 20px;
+            }
+          }
+
+          .select-vouchers {
+            font-weight: 600;
+            display: flex;
+            flex-wrap: wrap;
+
+            .select {
+              white-space: nowrap;
+              border: 1px solid;
+              padding: 0 .2rem;
+              margin: .3rem .2rem;
+            }
+          }
+        }
+      }
+
+      .price-container {
+        .price-list {
+          border-style: none none solid none;
+          border-width: 1px;
+          border-color: #e1e1e1;
+        }
+
+        .price {
+          display: flex;
+          justify-content: space-between;
+          margin-bottom: 1rem;
+        }
+      }
+    }
+  }
+}

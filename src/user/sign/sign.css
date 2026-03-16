@@ -1,0 +1,107 @@
+#sign {
+  background: linear-gradient(90deg, #09bce4 0%, #2659f3 100%);
+  padding: 3rem 0;
+}
+#sign .container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#sign .container .table-login {
+  background: rgba(0, 0, 0, 0.4);
+  padding: 2rem 2rem;
+  width: 35rem;
+  border-radius: 1rem;
+}
+#sign .container .table-login .required {
+  color: red;
+  margin-left: 0.3rem;
+}
+#sign .container .table-login .title {
+  font-size: 2rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  color: #fff;
+  text-align: center;
+  margin-bottom: 1rem;
+}
+#sign .container .table-login .form-sign {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+}
+#sign .container .table-login .form .name {
+  font-weight: 500;
+  color: #fff;
+  margin: 0.3rem 0;
+}
+#sign .container .table-login .form .input-form {
+  padding: 0.1rem 0;
+  margin-bottom: 1rem;
+}
+#sign .container .table-login .form .input-form input {
+  color: #fff;
+  width: 100%;
+  border: none;
+  background: transparent;
+  padding: 0.3rem 0;
+  box-shadow: inset 0 -1px 0 rgba(255, 255, 255, 0.45);
+  font-size: 1.1rem;
+  font-weight: 500;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+#sign .container .table-login .form .input-form input:focus {
+  box-shadow: inset 0 -2px 0 #fff;
+  outline: none !important;
+}
+#sign .container .forget-pass {
+  text-align: center;
+  font-weight: 400;
+  color: #dadada;
+  padding: 0 0.3rem 0.5rem;
+}
+#sign .container .forget-pass b {
+  color: #ffc107;
+  cursor: pointer;
+}
+#sign .container .forget-pass b:hover {
+  color: #ba8b00;
+}
+#sign .container .btn-login {
+  width: 100%;
+  text-align: center;
+  background: #f5df4d;
+  padding: 0.6rem 0;
+  font-weight: 600;
+  border-radius: 2rem;
+  cursor: pointer;
+  margin: 0.5rem 0 1rem;
+  font-size: 1.2rem;
+  border: none;
+}
+#sign .container .login-more {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  color: #fff;
+  margin-top: 0.5rem;
+}
+#sign .container .login-more .btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.6rem;
+  width: 10rem;
+  border-radius: 0.31rem;
+  cursor: pointer;
+}
+#sign .container .login-more .btn .icon {
+  display: flex;
+}
+#sign .container .login-more .btn .name {
+  font-weight: 500;
+}
+
+/*# sourceMappingURL=sign.css.map */

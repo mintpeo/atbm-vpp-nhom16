@@ -1,0 +1,174 @@
+#footer {
+  background: #134a04;
+
+  .container {
+    background: #900002;
+    border-top-left-radius: 5rem;
+    border-top-right-radius: 5rem;
+    display: flex;
+    justify-content: space-between;
+    padding: 3rem 5rem 0;
+
+    .title {
+      font-weight: bold;
+      color: #fbe263 !important;
+      font-size: 1rem;
+      margin-bottom: 10px;
+    }
+
+    .list-item {
+      list-style: none;
+      .item {
+        letter-spacing: .5px;
+        margin-bottom: 5px;
+
+        a {
+          text-decoration: none;
+          color: #fff;
+        }
+
+        &:before {
+          content: "-";
+          margin-right: 5px;
+          color: #fff;
+        }
+      }
+    }
+
+    .logo-footer {
+      width: 420px;
+
+      img {
+        max-width: 280px;
+      }
+
+      .about-company {
+        margin-top: 1rem;
+
+        p {
+          font-size: 1rem;
+          color: #fff;
+          margin-bottom: 5px;
+          letter-spacing: 1px;
+        }
+      }
+
+      .input-mail {
+        .mail {
+          width: 250px;
+          margin-top: 1rem;
+          padding: .8rem;
+          border-top-left-radius: 1rem;
+          border-bottom-left-radius: 1rem;
+          border: none;
+          font-size: 1rem;
+        }
+
+        .btn-input {
+          padding: .8rem;
+          border-top-right-radius: 1rem;
+          border-bottom-right-radius: 1rem;
+          background: #650000;
+          border: none;
+          font-size: 1rem;
+          color: #fff;
+          cursor: pointer;
+
+          &:hover {
+            filter: brightness(1.1);
+          }
+        }
+      }
+
+      .line-parker {
+        margin: 1rem 0 5px;
+
+        a {
+          display: flex;
+          align-items: center;
+          gap: 10px;
+          color: #fbe263;
+          text-transform: uppercase;
+          text-decoration: none;
+          font-size: .9rem;
+
+          img {
+            width: 100px;
+          }
+        }
+      }
+    }
+
+    .address {
+      width: 320px;
+      padding: 0 10px;
+
+      p {
+        margin-bottom: 5px;
+        letter-spacing: 1px;
+        font-size: .9rem;
+        color: #fff;
+
+        b {
+          color: #fbe263;
+        }
+      }
+    }
+
+    .contact {
+      width: 280px;
+      padding: 0 10px;
+
+      .font-contact {
+        font-weight: 600;
+        color: #fbe263;
+      }
+
+      p {
+        letter-spacing: 1px;
+        margin-bottom: 5px;
+
+        a {
+          margin-left: 5px;
+          text-decoration: none;
+          color: #fff !important;
+        }
+      }
+    }
+
+    .about {
+      width: 320px;
+      padding: 0 10px;
+
+      .logo-about {
+        margin-top: 1rem;
+        display: flex;
+
+        .icon {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          width: 3rem;
+          height: 3rem;
+          border-radius: 50%;
+          background-color: #fff;
+          margin-right: 8px;
+          font-size: 1.7rem;
+        }
+      }
+    }
+  }
+
+  .footer-bottom {
+    background: #650000;
+    padding: 1rem;
+
+    p {
+      text-align: center;
+      color: #fff;
+      font-weight: 500;
+      font-size: .9rem;
+      letter-spacing: 1px;
+    }
+  }
+}

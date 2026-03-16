@@ -1,0 +1,273 @@
+#detail {
+  padding: 1rem 4rem;
+  justify-content: center;
+}
+#detail .container {
+  display: flex;
+  justify-content: space-between;
+  border: solid 1px rgba(0, 0, 0, 0.125);
+  border-radius: 1rem;
+  box-shadow: 0 0 8px 2px rgba(179, 179, 179, 0.15);
+  padding: 1rem;
+}
+#detail .container .img-dt {
+  max-width: 30%;
+}
+#detail .container .img-dt .img-main {
+  border-radius: 1rem;
+  height: auto;
+  width: 100%;
+}
+#detail .container .img-dt .img-sub .swiper-slide {
+  transition: all 0.4s ease;
+}
+#detail .container .img-dt .img-sub .swiper-slide.active {
+  border-color: #2659f3;
+}
+#detail .container .img-dt .img-sub .img-list .img-item {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  overflow: hidden;
+  border-radius: 10px;
+  border: 4px solid #eee;
+  cursor: pointer;
+}
+#detail .container .img-dt .img-sub .img-list .img-item.active {
+  border-color: #2659f3;
+}
+#detail .container .info-dt {
+  width: 60%;
+  margin: 0 1.5rem;
+}
+#detail .container .info-dt .text-main {
+  font-size: 2rem;
+}
+#detail .container .info-dt .text-sub {
+  margin-top: 0.3rem;
+}
+#detail .container .info-dt .text-sub .text-left:after {
+  margin: 0 1rem;
+  content: "|";
+}
+#detail .container .info-dt .text-sub .text-last:after {
+  margin: 0 !important;
+  content: "";
+}
+#detail .container .info-dt .text-left {
+  margin-top: 0.5rem;
+  font-size: 90%;
+}
+#detail .container .info-dt .text-left span {
+  color: #2659f3;
+}
+#detail .container .info-dt .price {
+  display: flex;
+  background: #f1f1f1;
+  padding: 1rem;
+  margin: 1rem 0;
+}
+#detail .container .info-dt .price .pri-con {
+  display: flex;
+  align-items: center;
+  margin-right: auto;
+}
+#detail .container .info-dt .price .pri-con .price-dis {
+  font-size: 2rem;
+  letter-spacing: 2px;
+  color: #2659f3;
+  margin-right: 1rem;
+}
+#detail .container .info-dt .price .pri-con .price-noDis {
+  display: flex;
+  align-items: center;
+  text-decoration: line-through;
+}
+#detail .container .info-dt .price .dis-per {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: url("src/assets/icon-discount.png") no-repeat center;
+  width: 68px;
+  height: 68px;
+  white-space: nowrap;
+  font-size: 0.65rem;
+  color: #fff;
+}
+#detail .container .info-dt .price .dis-per strong {
+  font-size: 1rem;
+}
+#detail .container .info-dt .type {
+  font-weight: 500;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #eee;
+  display: flex;
+  align-items: center;
+}
+#detail .container .info-dt .type .type-color {
+  margin-left: 1rem;
+  width: 30px;
+  height: 30px;
+  background-color: #2659f3;
+  display: inline-block;
+  border: 2px solid #eee;
+  border-radius: 5px;
+  cursor: pointer;
+}
+#detail .container .info-dt .type .type-color.active {
+  border-color: #2659f3;
+}
+#detail .container .info-dt .amount {
+  padding: 1rem 0;
+}
+#detail .container .info-dt .amount .number {
+  display: flex;
+  margin-top: 0.5rem;
+}
+#detail .container .info-dt .amount .number input {
+  width: 60px;
+  border: 1px solid #ced4da;
+  border-left: 0;
+  border-right: 0;
+  height: 30px;
+  text-align: center;
+  color: #495057;
+}
+#detail .container .info-dt .amount .number .btn {
+  width: 30px;
+  height: 30px;
+  border-radius: 4px 0 0 4px;
+  border: 1px solid #ced4da;
+  background-color: transparent;
+  cursor: pointer;
+}
+#detail .container .info-dt .amount .number .right {
+  border-radius: 0 4px 4px 0;
+}
+#detail .container .info-dt .addCart {
+  display: flex;
+  gap: 0.8rem;
+  justify-content: space-between;
+}
+#detail .container .info-dt .addCart .btnCart {
+  display: flex;
+  justify-content: center;
+  padding: 1rem;
+  background-color: #fff;
+  border: 1px solid #2659f3;
+  color: #2659f3;
+  font-weight: 500;
+  border-radius: 5px;
+  text-transform: uppercase;
+  width: 50%;
+  cursor: pointer;
+}
+#detail .container .info-dt .addCart .btnCart .icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 0.5rem;
+  transform: scale(1.5);
+}
+#detail .container .info-dt .addCart .btnCart:hover {
+  background-color: #2659f3;
+  color: #fff;
+}
+#detail .container .info-dt .addCart .btnBlue {
+  background-color: #2659f3;
+  color: #fff;
+}
+#detail .container .info-dt .addCart .btnBlue:hover {
+  filter: brightness(1.2);
+}
+#detail .container .voucher-dt {
+  background-color: #dbe8ff;
+  padding: 0.5rem;
+  border-radius: 1rem;
+  height: auto;
+  width: auto;
+}
+#detail .container .voucher-dt .list-vou .item-vou {
+  display: flex;
+  align-items: center;
+  background-color: #fff;
+  margin-bottom: 1rem;
+  border-radius: 1rem;
+  padding: 0.5rem 0.5rem;
+  transition: all 0.4s;
+}
+#detail .container .voucher-dt .list-vou .item-vou:hover {
+  transform: scale(1.05);
+}
+#detail .container .voucher-dt .list-vou .item-vou .vou-left {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 50px;
+  height: 50px;
+  flex-shrink: 0;
+  background-color: #2659f3;
+  border-radius: 50%;
+}
+#detail .container .voucher-dt .list-vou .item-vou .vou-left .icon {
+  display: flex;
+  font-size: 32px;
+  color: #fff;
+}
+#detail .container .voucher-dt .list-vou .item-vou .vou-right {
+  width: 100%;
+  white-space: nowrap;
+  text-align: left;
+  border-left: 2px dashed #2659f3;
+  padding-left: 1rem;
+  margin-left: 1rem;
+  position: relative;
+}
+#detail .container .voucher-dt .list-vou .item-vou .vou-right:before {
+  content: "";
+  position: absolute;
+  width: 20px;
+  height: 10px;
+  border: 1px solid #dbe8ff;
+  top: -11%;
+  left: -7.5%;
+  border-bottom-right-radius: 25px;
+  border-bottom-left-radius: 25px;
+  background-color: #dbe8ff;
+}
+#detail .container .voucher-dt .list-vou .item-vou .vou-right:after {
+  content: "";
+  position: absolute;
+  width: 20px;
+  height: 10px;
+  border: 1px solid #dbe8ff;
+  bottom: -12%;
+  left: -7.5%;
+  border-top-right-radius: 25px;
+  border-top-left-radius: 25px;
+  background-color: #dbe8ff;
+}
+#detail .container .voucher-dt .list-vou .item-vou .vou-right .vou-info {
+  position: relative;
+}
+#detail .container .voucher-dt .list-vou .item-vou .vou-right .vou-info .text-vou {
+  font-size: 80%;
+  line-height: 1.2rem;
+}
+#detail .container .voucher-dt .list-vou .item-vou .vou-right .btn-vou {
+  position: absolute;
+  bottom: 3%;
+  right: 0;
+}
+#detail .container .voucher-dt .list-vou .item-vou .vou-right .btn-vou .btn-copy {
+  padding: 0.2rem 0.3rem;
+  font-size: 50%;
+  border-radius: 1rem;
+  background-color: #2659f3;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+}
+
+/*# sourceMappingURL=detail.css.map */

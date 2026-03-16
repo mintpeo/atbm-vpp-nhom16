@@ -1,0 +1,48 @@
+.account-boxs {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+}
+.account-boxs .item-box {
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+  border-radius: 1rem;
+  transition: all 0.4s;
+  max-width: 40rem;
+}
+.account-boxs .item-box .item-box-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+}
+.account-boxs .item-box .item-box-info .text {
+  color: #2659f3;
+  font-weight: 500;
+  width: 15rem;
+}
+.account-boxs .item-box .item-box-info .icon-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.account-boxs .item-box .item-box-info .icon-info .icon {
+  background-position: center;
+  background-size: cover;
+  width: 80px;
+  height: 80px;
+  margin-bottom: 0.5rem;
+}
+.account-boxs .item-box .item-box-info .icon-info .btn {
+  padding: 0.5rem;
+  color: #2659f3;
+  background: #fbe263;
+  border-radius: 0.3rem;
+  font-weight: 500;
+  cursor: pointer;
+}
+.account-boxs .item-box:hover {
+  transform: translateY(-5px);
+}
+
+/*# sourceMappingURL=accountBoxs.css.map */

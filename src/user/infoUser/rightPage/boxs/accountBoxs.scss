@@ -1,0 +1,53 @@
+.account-boxs {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+
+  .item-box {
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+    border-radius: 1rem;
+    transition: all .4s;
+    max-width: 40rem;
+
+    .item-box-info {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem;
+
+      .text {
+        color: #2659f3;
+        font-weight: 500;
+        width: 15rem;
+      }
+
+      .icon-info {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
+        .icon {
+          background-position: center;
+          background-size: cover;
+          width: 80px;
+          height: 80px;
+          margin-bottom: .5rem;
+        }
+
+        .btn {
+          padding: .5rem;
+          color: #2659f3;
+          background: #fbe263;
+          border-radius: .3rem;
+          font-weight: 500;
+          cursor: pointer;
+        }
+      }
+    }
+
+    &:hover {
+      transform: translateY(-5px);
+    }
+  }
+}

@@ -1,0 +1,49 @@
+.right-user .title {
+  color: #fb9f10;
+  font-weight: 600;
+  font-size: 1.2rem;
+  text-transform: uppercase;
+}
+.right-user .extraInfo .info {
+  margin: 1rem 0;
+}
+.right-user .extraInfo .info p {
+  margin-bottom: 0.3rem;
+}
+.right-user .extraInfo .info b {
+  color: #dc3545;
+}
+.right-user .extraInfo .info .form-control {
+  width: 100%;
+  height: 2.2rem;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  border: 1px solid #ced4da;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  background-color: #fff;
+  color: #495057;
+}
+.right-user .extraInfo .info .form-control:focus {
+  border-color: #0d5cb6;
+  outline: none;
+  box-shadow: none;
+}
+.right-user .extraInfo .btn-update {
+  text-align: center;
+}
+.right-user .extraInfo .btn-update .btn {
+  padding: 0.5rem;
+  border-radius: 1rem;
+  border: none;
+  background: #2659f3;
+  font-weight: bold;
+  font-size: 1rem;
+  color: #fff;
+  cursor: pointer;
+  width: 10.5rem;
+}
+.right-user .extraInfo .btn-update .btn:hover {
+  filter: brightness(1.2);
+}
+
+/*# sourceMappingURL=user.css.map */

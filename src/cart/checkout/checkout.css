@@ -1,0 +1,173 @@
+#check-out .container {
+  display: flex;
+  justify-content: center;
+  margin: 1rem 0;
+}
+#check-out .container .side-left {
+  border-style: none solid none none;
+  border-width: 1px;
+  border-color: #e1e1e1;
+  max-width: 40%;
+}
+#check-out .container .side-left .container-left {
+  margin-right: 2rem;
+}
+#check-out .container .side-left .container-left .logo {
+  margin-bottom: 1rem;
+}
+#check-out .container .side-left .container-left .info-checkout {
+  margin-bottom: 2rem;
+}
+#check-out .container .side-left .container-left .info-checkout .title {
+  font-weight: 600;
+  margin-bottom: 1rem;
+  font-size: 1.3rem;
+}
+#check-out .container .side-left .container-left .info-checkout .user {
+  display: flex;
+  margin-bottom: 1.2rem;
+}
+#check-out .container .side-left .container-left .info-checkout .user .icon {
+  width: 30px;
+  height: 30px;
+}
+#check-out .container .side-left .container-left .info-checkout .user .name {
+  color: #737373;
+}
+#check-out .container .side-left .container-left .info-checkout .user .name .log-out {
+  color: #000 !important;
+}
+#check-out .container .side-left .container-left .info-checkout .address .field-input {
+  width: 100%;
+  height: 3rem;
+  margin-bottom: 1rem;
+  padding: 0.2rem 0.5rem;
+  font-size: 1rem;
+}
+#check-out .container .side-left .container-left .info-checkout .address .field-input:focus {
+  box-shadow: 0 0 0 2px #338dbc;
+  outline: none;
+}
+#check-out .container .side-left .container-left .info-checkout .address .select-address {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+}
+#check-out .container .side-left .container-left .step-checkout {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+#check-out .container .side-left .container-left .step-checkout a {
+  text-decoration: none;
+}
+#check-out .container .side-left .container-left .step-checkout .back-cart {
+  color: #000;
+}
+#check-out .container .side-left .container-left .step-checkout .btn-checkout {
+  background: #338dbc;
+  color: #fff;
+  padding: 0.5rem 3rem;
+  border: none;
+  font-size: 1rem;
+  cursor: pointer;
+}
+#check-out .container .side-left .container-left .step-checkout .btn-checkout:hover {
+  color: #fff;
+  filter: brightness(1.2);
+}
+#check-out .container .side-right {
+  margin-left: 2rem;
+  width: 25%;
+}
+#check-out .container .side-right .list-cart {
+  list-style: none;
+  max-height: 10rem;
+  overflow-y: auto;
+  margin-bottom: 1rem;
+  border-style: none none solid none;
+  border-width: 1px;
+  border-color: #e1e1e1;
+}
+#check-out .container .side-right .list-cart .item-cart {
+  margin-bottom: 1rem;
+}
+#check-out .container .side-right .list-cart .item-cart .item-container {
+  display: flex;
+  gap: 1rem;
+}
+#check-out .container .side-right .list-cart .item-cart .item-container .item-img {
+  width: auto;
+  height: 4rem;
+}
+#check-out .container .side-right .list-cart .item-cart .item-container .item-info .type {
+  color: #969696;
+  font-size: 0.8rem;
+}
+#check-out .container .side-right .voucher {
+  border-style: none none solid none;
+  border-width: 1px;
+  border-color: #e1e1e1;
+  margin-bottom: 1rem;
+}
+#check-out .container .side-right .voucher .apply-voucher {
+  border: 1px dashed #4f95ff;
+  padding: 1rem;
+  display: flex;
+  gap: 0.5rem;
+}
+#check-out .container .side-right .voucher .apply-voucher .input-voucher {
+  width: 70%;
+  height: 3rem;
+  padding: 0.5rem;
+  border: 1px solid #97c0ff;
+  box-shadow: none;
+}
+#check-out .container .side-right .voucher .apply-voucher .input-voucher:focus {
+  box-shadow: none;
+  outline: none;
+}
+#check-out .container .side-right .voucher .apply-voucher .apply {
+  background: #338dbc;
+  border: none;
+  color: #fff;
+  width: 30%;
+  cursor: pointer;
+}
+#check-out .container .side-right .voucher .more-vouchers {
+  margin: 1rem 0 0.5rem;
+  color: #FF232C;
+}
+#check-out .container .side-right .voucher .more-vouchers .title {
+  display: flex;
+  margin-bottom: 0.5rem;
+}
+#check-out .container .side-right .voucher .more-vouchers .title i {
+  display: flex;
+  align-items: center;
+  width: 20px;
+  height: 20px;
+}
+#check-out .container .side-right .voucher .more-vouchers .select-vouchers {
+  font-weight: 600;
+  display: flex;
+  flex-wrap: wrap;
+}
+#check-out .container .side-right .voucher .more-vouchers .select-vouchers .select {
+  white-space: nowrap;
+  border: 1px solid;
+  padding: 0 0.2rem;
+  margin: 0.3rem 0.2rem;
+}
+#check-out .container .side-right .price-container .price-list {
+  border-style: none none solid none;
+  border-width: 1px;
+  border-color: #e1e1e1;
+}
+#check-out .container .side-right .price-container .price {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+/*# sourceMappingURL=checkout.css.map */
