@@ -4,7 +4,7 @@ import './login.css'
 import { FaGoogle } from "react-icons/fa6";
 import { FaFacebook } from "react-icons/fa";
 
-import {API_URL, INFO_USER, KEY_LOGGED} from "../../service/API_URL.jsx";
+import {API_URL, API_URL_BE, INFO_USER, KEY_LOGGED} from "../../service/API_URL.jsx";
 import {useNavigate} from "react-router-dom";
 
 const Login = () => {
@@ -16,24 +16,25 @@ const Login = () => {
     const login = async (e) => {
         e.preventDefault();
 
+        const login = {
+            email: email,
+            password: password,
+        };
+
         try {
-            const res = await fetch(`${API_URL}/users?email=${email}&password=${password}`);
-            const user = await res.json(); // array
+            const res = await fetch(`${API_URL_BE}/user/login`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(login),
+            });
 
-            if (user.length > 0) {
-                const publicInfo = {
-                    id: user[0].id,
-                    lastName: user[0].lastName,
-                    firstName: user[0].firstName,
-                    email: user[0].email,
-                    phone: user[0].phone,
-                    "dateOfBirth": user[0].dateOfBirth,
-                    "address": user[0].address
-                }
-
+            if (res.ok) {
+                const user = await res.json(); // array
                 // Save Info User
                 localStorage.setItem(KEY_LOGGED, "true");
-                localStorage.setItem(INFO_USER, JSON.stringify(publicInfo)); // array[0]
+                localStorage.setItem(INFO_USER, JSON.stringify(user)); // array[0]
 
                 alert("Đăng nhập thành công!");
                 navigate("/");
