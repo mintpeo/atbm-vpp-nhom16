@@ -1,15 +1,14 @@
 import React, { useState } from 'react';
 import './sign.css'
-import {API_URL, INFO_USER, KEY_LOGGED} from "../../service/API_URL.jsx";
+import {API_URL_BE, INFO_USER, KEY_LOGGED} from "../../service/API_URL.jsx";
 
 import {FaGoogle} from "react-icons/fa6";
 import {FaFacebook} from "react-icons/fa";
 
 import { useNavigate } from "react-router-dom";
+import LoadingModal from "../../components/LoadingModal.jsx";
 
 const Sign = () => {
-    const API = API_URL;
-
     const navigate = useNavigate();
 
     const [email, setEmail] = useState("");
@@ -17,33 +16,35 @@ const Sign = () => {
     const [lastName, setLastName] = useState("");
     const [firstName, setFirstName] = useState("");
     const [phone, setPhone] = useState("");
+    const [isLoading, setIsLoading] = useState(false);
 
     const sign = async (e) => {
         e.preventDefault();
+        setIsLoading(true);
 
         // Check duplication
-        const checkRes = await fetch(`${API}/users?email=${email}`);
-        const existUsers = await checkRes.json();
+        // const checkRes = await fetch(`${API}/users?email=${email}`);
+        // const existUsers = await checkRes.json();
 
-        if (existUsers.length > 0) {
-            alert("Email này đã có người sử dụng!");
-            return;
-        }
+        // if (existUsers.length > 0) {
+        //     alert("Email này đã có người sử dụng!");
+        //     return;
+        // }
 
         // Create new user
         const newUser = {
             email: email,
             password: password,
-            lastName: lastName,
-            firstName: firstName,
-            phone: phone,
-            dateOfBirth: "",
-            address: "",
-            role: "user"
+            // lastName: lastName,
+            // firstName: firstName,
+            // phone: phone,
+            // dateOfBirth: "",
+            // address: "",
+            // role: "user"
         };
 
         try {
-            const res = await fetch(`${API}/users`, {
+            const res = await fetch(`${API_URL_BE}/user/sign`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -51,11 +52,19 @@ const Sign = () => {
                 body: JSON.stringify(newUser),
             });
 
+            setIsLoading(false);
+
             if (res.ok) {
-                const resLogin = await fetch(`${API}/users?email=${email}&password=${password}`);
+                const resLogin = await fetch(`${API_URL_BE}/user/login`, {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify(newUser),
+                });
                 const user = await resLogin.json();
                 localStorage.setItem(KEY_LOGGED, "true");
-                localStorage.setItem(INFO_USER, JSON.stringify(user[0]));
+                localStorage.setItem(INFO_USER, JSON.stringify(user));
                 alert("Đăng ký thành công.");
                 navigate("/");
             }
@@ -66,18 +75,19 @@ const Sign = () => {
 
     return (
         <div id="sign">
+            <LoadingModal isOpen={isLoading}/>
             <div className="container">
                 <form className="table-login" onSubmit={sign}>
                     <div className="title">Đăng ký</div>
                     <div className="form-sign form">
                         <div className="item">
                             <div className="name">Họ<span className="required">(*)</span>:</div>
-                            <div className="input-form"><input type="text" placeholder="Nhập Họ" onChange={(e) => setLastName(e.target.value)} required/></div>
+                            <div className="input-form"><input type="text" placeholder="Nhập Họ" onChange={(e) => setLastName(e.target.value)}/></div>
                         </div>
 
                         <div className="item">
                             <div className="name">Tên<span className="required">(*)</span>:</div>
-                            <div className="input-form"><input type="text" placeholder="Nhập Tên" onChange={(e) => setFirstName(e.target.value)} required/></div>
+                            <div className="input-form"><input type="text" placeholder="Nhập Tên" onChange={(e) => setFirstName(e.target.value)}/></div>
                         </div>
 
                         <div className="item">
@@ -87,7 +97,7 @@ const Sign = () => {
 
                         <div className="item">
                             <div className="name">Số điện thoại<span className="required">(*)</span>:</div>
-                            <div className="input-form"><input type="text" placeholder="Nhập Số điện thoại" onChange={(e) => setPhone(e.target.value)} required/></div>
+                            <div className="input-form"><input type="text" placeholder="Nhập Số điện thoại" onChange={(e) => setPhone(e.target.value)}/></div>
                         </div>
                     </div>
 

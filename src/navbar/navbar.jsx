@@ -48,9 +48,7 @@ const Navbar = () => {
 
     // Button Logout
     const logout = () => {
-      localStorage.removeItem(KEY_LOGGED);
-      localStorage.removeItem(INFO_USER);
-      localStorage.removeItem(QUANTITY_CART);
+      localStorage.clear();
       navigate("/");
       window.location.reload();
     };
@@ -124,7 +122,7 @@ const Navbar = () => {
                             <div className="name">
                                 <span>
                                     {
-                                        loginStatus === "true" ? (<Link to="/user/info"><p className="first" title="Tài khoản">Hi, {user.lastName}</p></Link>)
+                                        loginStatus === "true" ? (<Link to="/user/info"><p className="first" title="Tài khoản">Hi,</p></Link>)
                                             : (<Link to="/user/login"><p className="first" title="Đăng nhập">Đăng nhập</p></Link>)
                                     }
                                 </span>
