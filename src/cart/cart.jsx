@@ -3,14 +3,62 @@ import './cart.css';
 
 import {Link, useNavigate} from "react-router-dom";
 import { MdLocalShipping } from "react-icons/md";
-import {API_URL, QUANTITY_CART} from "../service/API_URL.jsx";
+import {API_URL, API_URL_BE, QUANTITY_CART} from "../service/API_URL.jsx";
 import {GetStoredUser} from "../service/GetStoredUser.jsx";
-import useFetch from "../hooks/useFetch.js";
 
 const Cart = () => {
     const [user] = useState(GetStoredUser);
+    const [carts, setCarts] = useState([]);
+    const [products, setProducts] = useState({});
+
     // Load list carts
-    const {data: carts}= useFetch(`${API_URL}/carts?userId=${user.id}`);
+    const loadCarts = async () => {
+        const userCart = {
+            userId: user.id
+        };
+
+        try {
+            const res = await fetch(`${API_URL_BE}/cart/show`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(userCart),
+            })
+
+            const data = await res.json();
+            setCarts(data);
+        } catch (e) {
+            console.log("Error Cart", e);
+        }
+    }
+
+    useEffect(() => {
+        loadCarts();
+    }, []);
+
+    // Load product item
+    useEffect(() => {
+        const fetchProducts = async () => {
+            const productMap = {};
+
+            for (const item of carts) {
+                const res = await fetch(`${API_URL}/products/${item.productId}`);
+                const product = await res.json();
+
+                productMap[item.productId] = product;
+            }
+
+            setProducts(productMap);
+        };
+
+        if (carts.length > 0) {
+            fetchProducts();
+        }
+    }, [carts]);
+
+    console.log(carts);
+
     const [selectedItems, setSelectedItems] = useState([]);
 
     const navigate = useNavigate();
@@ -125,14 +173,14 @@ const Cart = () => {
 
                                             <div className="item-cart">
                                                 <div className="item-left">
-                                                    <div className="name" title="222">{item.name}</div>
+                                                    <div className="name" title="222">{products[item.productId]?.name}</div>
                                                     <div className="type">Mực {item.color}</div>
                                                 </div>
 
                                                 <div className="item-middle">
-                                                    <div className="price-dis">{item.price.toLocaleString()} {item.currency}</div>
-                                                    <div className="price-noDis">{item.originalPrice.toLocaleString()} {item.currency}</div>
-                                                    <div className="price-percent">-{calculateDiscountPercentage(item.originalPrice, item.price)}%</div>
+                                                    <div className="price-dis">{products[item.productId]?.price.toLocaleString()} {item.currency}</div>
+                                                    <div className="price-noDis">{products[item.productId]?.originalPrice.toLocaleString()} {item.currency}</div>
+                                                    <div className="price-percent">-{calculateDiscountPercentage(products[item.productId]?.originalPrice, products[item.productId]?.price)}%</div>
                                                 </div>
 
                                                 <div className="item-right">

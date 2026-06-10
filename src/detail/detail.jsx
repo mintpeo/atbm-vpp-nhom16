@@ -3,27 +3,58 @@ import './detail.css';
 
 import {useParams} from "react-router-dom";
 import useFetch from "../hooks/useFetch.js";
-import {API_URL} from "../service/API_URL.jsx";
+import {API_URL, API_URL_BE} from "../service/API_URL.jsx";
 import {Swiper, SwiperSlide} from "swiper/react";
 import {Autoplay, Navigation} from "swiper/modules";
 
 import { BsCart3 } from "react-icons/bs";
 import { HiTicket } from "react-icons/hi2";
+import {GetStoredUser} from "../service/GetStoredUser.jsx";
 
 const Detail = () => {
     // Get id product from url
     const {id} = useParams();
     const {data: product, loading: loading} = useFetch(`${API_URL}/products/${id}`);
+    const [user] = useState(GetStoredUser);
 
     // Save index img-main and img-sub
     const [activeIndex, setActiveIndex] = useState(0);
     const [numTypeCol, setNumTypeCol] = useState(0);
+    const [typeText, setTypeText] = useState("");
 
     // Quantity
     const [quantity, setQuantity] = useState(1);
 
     // Copy Voucher
     const [choose, setChoose] = useState(0);
+
+    // Add to cart
+    const addToCart = async () => {
+        const hasColors = product.colors && product.colors.length > 0;
+        const productType = typeText || (hasColors ? product.colors[0].name : "" );
+
+        const cart = {
+            userId: user.id,
+            productId: id,
+            type: productType,
+            quantity: quantity,
+            image: product.images[0]
+        }
+
+        try {
+            const res = await fetch(`${API_URL_BE}/cart/add`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(cart),
+            });
+
+            if (res.ok) alert("Add To Cart Success");
+        } catch (e) {
+            console.log("Error cart", e)
+        }
+    }
 
     // Choose Type Col
     const handleTypeCol = (imgColo) => {
@@ -138,6 +169,7 @@ const Detail = () => {
                             <div onClick={() => {
                                 handleTypeCol(item.image);
                                 setNumTypeCol(index);
+                                setTypeText(item.name);
                             }} className={`type-color ${handleChooseType(index) ? 'active' : ''}`} style={{backgroundColor: item.code}}></div>
                         ))}
                     </div>
@@ -152,7 +184,7 @@ const Detail = () => {
                         </div>
                     </div>
 
-                    <div className="addCart">
+                    <div className="addCart" onClick={addToCart}>
                         <button className="btnCart"><i className="icon"><BsCart3/></i> Thêm vào giỏ</button>
                         <button className="btnCart btnBlue">Mua ngay</button>
                     </div>
