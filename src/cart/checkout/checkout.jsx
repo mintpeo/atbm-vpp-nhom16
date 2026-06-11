@@ -6,15 +6,65 @@ import { LuTicket } from "react-icons/lu";
 
 import logoTL from '/src/assets/logoTL-checkout.png'
 import {Link, useLocation} from "react-router-dom";
-import {API_URL} from "../../service/API_URL.jsx";
+import {API_URL, API_URL_BE} from "../../service/API_URL.jsx";
 
 const Checkout = () => {
     const location = useLocation();
-    const products = location.state.products;
+    const selected = location.state.selected;
+
+    const [carts, setCarts] = useState([]);
+    const [products, setProducts] = useState({});
 
     const [provinces, setProvinces] = useState([]);
     const [districts, setDistricts] = useState([]);
     const [wards, setWards] = useState([]);
+
+    // Load list carts
+    const loadCarts = async () => {
+        try {
+            const res = await fetch(`${API_URL_BE}/cart/showSelected`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(selected),
+            })
+
+            const data = await res.json();
+            setCarts(data);
+        } catch (e) {
+            console.log("Error Cart CheckOut", e);
+        }
+    }
+
+    useEffect(() => {
+        loadCarts();
+        loadProvinces();
+        loadDistricts();
+        loadWards();
+    }, []);
+
+    // Load product item
+    useEffect(() => {
+        const fetchProducts = async () => {
+            const productMap = {};
+
+            for (const item of carts) {
+                const res = await fetch(`${API_URL}/products/${item.productId}`);
+                const product = await res.json();
+
+                productMap[item.productId] = product;
+            }
+
+            setProducts(productMap);
+        };
+
+        if (carts.length > 0) {
+            fetchProducts();
+        }
+    }, [carts]);
+
+    console.log(carts);
 
     const loadProvinces = async () => {
         try {
@@ -46,20 +96,17 @@ const Checkout = () => {
         }
     }
 
-    useEffect(() => {
-        loadProvinces();
-        loadDistricts();
-        loadWards();
-    }, []);
-
     // Total Price In Cart
     const totalPrice = () => {
         let total = 0;
         let stringCur = "";
 
-        products.forEach(item => {
-            total += item.price * item.quantity;
-            stringCur = item.currency;
+        carts.forEach(itemCart => {
+            if (itemCart) {
+                const product = products[itemCart.productId];
+                total += Number(product?.price || 0) * Number(itemCart.quantity || 0);
+                stringCur = product?.currency || "";
+            }
         })
 
         return total.toLocaleString() + " " + stringCur;
@@ -154,18 +201,18 @@ const Checkout = () => {
                 <div className="side-right">
                     {/* LIST CART */}
                     <ul className="list-cart">
-                        {products.map((item) => (
+                        {carts.map((item) => (
                             <li className="item-cart">
                                 <div className="item-container">
                                     <img className="item-img" src={item.image} alt=""/>
 
                                     <div className="item-info">
-                                        <div className="name">{item.name}</div>
-                                        <div className="type">{item.color}</div>
+                                        <div className="name">{products[item.productId]?.name}</div>
+                                        <div className="type">Loại: {item.type}</div>
                                         <div className="type">Số lượng: {item.quantity}</div>
                                     </div>
 
-                                    <div className="item-price">{item.price.toLocaleString()} {item.currency}</div>
+                                    <div className="item-price">{products[item.productId]?.price.toLocaleString()} {products[item.productId]?.currency}</div>
                                 </div>
                             </li>
                         ))}
