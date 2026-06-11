@@ -7,9 +7,11 @@ import {API_URL, API_URL_BE, QUANTITY_CART} from "../service/API_URL.jsx";
 import {GetStoredUser} from "../service/GetStoredUser.jsx";
 
 const Cart = () => {
+    const navigate = useNavigate();
     const [user] = useState(GetStoredUser);
     const [carts, setCarts] = useState([]);
     const [products, setProducts] = useState({});
+    const [selectedItems, setSelectedItems] = useState([]);
 
     // Load list carts
     const loadCarts = async () => {
@@ -59,18 +61,12 @@ const Cart = () => {
 
     console.log(carts);
 
-    const [selectedItems, setSelectedItems] = useState([]);
-
-    const navigate = useNavigate();
-
     // Selected Item
-    const toggleSelectItem = (item) => {
-        const isExisted = selectedItems.some(selected => selected.id === item.id);
-
-        if (isExisted) {
-            setSelectedItems(selectedItems.filter(selected => selected.id !== item.id)); // Co Roi Thi Loai Bo
+    const toggleSelectItem = (id) => {
+        if (selectedItems.includes(id)) {
+            setSelectedItems(selectedItems.filter(selectedId => selectedId !== id)); // Co Roi Thi Loai Bo
         } else {
-            setSelectedItems([...selectedItems, item]); // Chua Thi Them Vao
+            setSelectedItems([...selectedItems, id]); // Chua Thi Them Vao
         }
     };
 
@@ -79,13 +75,14 @@ const Cart = () => {
         let total = 0;
         let stringCur = "";
 
-        selectedItems.forEach(itemSelected => {
-            carts.forEach(itemCart => {
-                if (itemSelected.id === itemCart.id) {
-                    total += itemCart.price * itemCart.quantity;
-                }
-                stringCur = itemCart.currency;
-            })
+        selectedItems.forEach(itemSelectedId => {
+            const itemCart = carts.find(cart => cart.id === itemSelectedId);
+
+            if (itemCart) {
+                const product = products[itemCart.productId];
+                total += Number(product?.price || 0) * Number(itemCart.quantity || 0);
+                stringCur = product?.currency || "";
+            }
         });
 
         return total.toLocaleString() + " " + stringCur;
@@ -149,7 +146,7 @@ const Cart = () => {
     // Click Check Out
     const clickCheckOut = () => {
       if (selectedItems && selectedItems.length === 0) alert("Vui lòng chọn sản phẩm để tiến hành đặt hàng!");
-      else navigate("/cart/checkout", {state: {products: selectedItems}});
+      else navigate("/cart/checkout", {state: {selected: selectedItems}});
     };
 
     return (
@@ -165,8 +162,8 @@ const Cart = () => {
                                         <div className="list-cart">
                                             <input
                                                 type="checkbox"
-                                                checked={selectedItems.some(selected => selected.id === item.id)}
-                                                onChange={() => toggleSelectItem(item)}
+                                                checked={selectedItems.includes(item.id)}
+                                                onChange={() => toggleSelectItem(item.id)}
                                             />
 
                                             <img src={item.image} alt="" className="item-img"/>
@@ -174,12 +171,12 @@ const Cart = () => {
                                             <div className="item-cart">
                                                 <div className="item-left">
                                                     <div className="name" title="222">{products[item.productId]?.name}</div>
-                                                    <div className="type">Mực {item.color}</div>
+                                                    <div className="type">Loại: {item.type}</div>
                                                 </div>
 
                                                 <div className="item-middle">
-                                                    <div className="price-dis">{products[item.productId]?.price.toLocaleString()} {item.currency}</div>
-                                                    <div className="price-noDis">{products[item.productId]?.originalPrice.toLocaleString()} {item.currency}</div>
+                                                    <div className="price-dis">{products[item.productId]?.price.toLocaleString()} {products[item.productId]?.currency}</div>
+                                                    <div className="price-noDis">{products[item.productId]?.originalPrice.toLocaleString()} {products[item.productId]?.currency}</div>
                                                     <div className="price-percent">-{calculateDiscountPercentage(products[item.productId]?.originalPrice, products[item.productId]?.price)}%</div>
                                                 </div>
 
