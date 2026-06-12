@@ -7,10 +7,12 @@ import { LuTicket } from "react-icons/lu";
 import logoTL from '/src/assets/logoTL-checkout.png'
 import {Link, useLocation} from "react-router-dom";
 import {API_URL, API_URL_BE} from "../../service/API_URL.jsx";
+import {GetStoredUser} from "../../service/GetStoredUser.jsx";
 
 const Checkout = () => {
     const location = useLocation();
     const selected = location.state.selected;
+    const [user] = useState(GetStoredUser);
 
     const [carts, setCarts] = useState([]);
     const [products, setProducts] = useState({});
@@ -18,6 +20,46 @@ const Checkout = () => {
     const [provinces, setProvinces] = useState([]);
     const [districts, setDistricts] = useState([]);
     const [wards, setWards] = useState([]);
+
+    // Btn CheckOut
+    const btnCheckOut = async () => {
+        const total = carts.reduce((sum, item) => {
+            const product = products[item.productId];
+            return sum + (Number(item.quantity || 0) * Number(product?.price || 0));
+        }, 0);
+
+        const order = {
+            userId: user.id,
+            totalPrice: total,
+            privateKey: "MIIBSwIBADCCASwGByqGSM44BAEwggEfAoGBAP1/U4EddRIpUt9KnC7s5Of2EbdSPO9EAMMeP4C2USZpRV1AIlH7WT2NWPq/xfW6MPbLm1Vs14E7gB00b/JmYLdrmVClpJ+f6AR7ECLCT7up1/63xhv4O1fnxqimFQ8E+4P208UewwI1VBNaFpEy9nXzrith1yrv8iIDGZ3RSAHHAhUAl2BQjxUjC8yykrmCouuEC/BYHPUCgYEA9+GghdabPd7LvKtcNrhXuXmUr7v6OuqC+VdMCz0HgmdRWVeOutRZT+ZxBxCBgLRJFnEj6EwoFhO3zwkyjMim4TwWeotUfI0o4KOuHiuzpnWRbqN/C/ohNWLx+2J6ASQ7zKTxvqhRkImog9/hWuWfBpKLZl6Ae1UlZAFMO/7PSSoEFgIUDJ9cjAz4FBYxHDqLFg5q2iDjYi0=",
+            items: orderItems
+        }
+
+        try {
+            const res = await fetch(`${API_URL_BE}/signature/sign`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(order),
+            });
+
+            if (res.ok) alert("Thanh toan thanh cong");
+        } catch (e) {
+            console.log("Error Check Out", e);
+        }
+    }
+
+    const orderItems = carts.map(item => {
+        const product = products[item.productId];
+
+        return {
+            productId: item.productId,
+            quantity: item.quantity,
+            type: item.type,
+            price: product?.price
+        };
+    });
 
     // Load list carts
     const loadCarts = async () => {
@@ -36,13 +78,6 @@ const Checkout = () => {
             console.log("Error Cart CheckOut", e);
         }
     }
-
-    useEffect(() => {
-        loadCarts();
-        loadProvinces();
-        loadDistricts();
-        loadWards();
-    }, []);
 
     // Load product item
     useEffect(() => {
@@ -101,16 +136,25 @@ const Checkout = () => {
         let total = 0;
         let stringCur = "";
 
-        carts.forEach(itemCart => {
+        selected.forEach(itemSelectedId => {
+            const itemCart = carts.find(cart => cart.id === itemSelectedId);
+
             if (itemCart) {
                 const product = products[itemCart.productId];
                 total += Number(product?.price || 0) * Number(itemCart.quantity || 0);
                 stringCur = product?.currency || "";
             }
-        })
+        });
 
         return total.toLocaleString() + " " + stringCur;
     };
+
+    useEffect(() => {
+        loadCarts();
+        loadProvinces();
+        loadDistricts();
+        loadWards();
+    }, []);
 
     return (
         <div id="check-out">
@@ -192,7 +236,7 @@ const Checkout = () => {
                         <div className="step-checkout">
                             {/* BACK CART */}
                             <Link to={"/cart"}><div className="back-cart">Giỏ hàng</div></Link>
-                            <button className="btn-checkout">Thanh toán</button>
+                            <button className="btn-checkout" onClick={btnCheckOut}>Thanh toán</button>
                         </div>
                     </div>
                 </div>
