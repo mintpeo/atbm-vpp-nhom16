@@ -122,7 +122,7 @@ const Navbar = () => {
                             <div className="name">
                                 <span>
                                     {
-                                        loginStatus === "true" ? (<Link to="/user/info"><p className="first" title="Tài khoản">Hi,</p></Link>)
+                                        loginStatus === "true" ? (<Link to="/user/info"><p className="first" title="Tài khoản">Hi, {user.name}</p></Link>)
                                             : (<Link to="/user/login"><p className="first" title="Đăng nhập">Đăng nhập</p></Link>)
                                     }
                                 </span>

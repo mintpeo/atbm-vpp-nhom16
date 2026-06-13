@@ -1,25 +1,49 @@
 import React, {useEffect, useState} from 'react';
 import './checkout.css';
+import './checkoutModal.css';
 
 import { FaRegUser } from "react-icons/fa";
 import { LuTicket } from "react-icons/lu";
 
 import logoTL from '/src/assets/logoTL-checkout.png'
-import {Link, useLocation} from "react-router-dom";
+import {Link, useLocation, useNavigate} from "react-router-dom";
 import {API_URL, API_URL_BE} from "../../service/API_URL.jsx";
 import {GetStoredUser} from "../../service/GetStoredUser.jsx";
 
 const Checkout = () => {
     const location = useLocation();
     const selected = location.state.selected;
+    const navigate = useNavigate();
     const [user] = useState(GetStoredUser);
 
     const [carts, setCarts] = useState([]);
     const [products, setProducts] = useState({});
+    const [showModal, setShowModal] = useState(false);
+    const [privateKey, setPrivateKey] = useState("");
 
     const [provinces, setProvinces] = useState([]);
     const [districts, setDistricts] = useState([]);
     const [wards, setWards] = useState([]);
+
+    // Verify private key
+    const verify = async (orderId) => {
+        try {
+            const res = await fetch(`${API_URL_BE}/signature/verify`, {
+                method: "Post",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    "orderId": orderId
+                })
+            });
+            const data = await res.json();
+            if (data) alert("TRUE");
+            else alert("False");
+        } catch (e) {
+            console.log("Error Verify Order", e);
+        }
+    }
 
     // Btn CheckOut
     const btnCheckOut = async () => {
@@ -31,7 +55,7 @@ const Checkout = () => {
         const order = {
             userId: user.id,
             totalPrice: total,
-            privateKey: "MIIBSwIBADCCASwGByqGSM44BAEwggEfAoGBAP1/U4EddRIpUt9KnC7s5Of2EbdSPO9EAMMeP4C2USZpRV1AIlH7WT2NWPq/xfW6MPbLm1Vs14E7gB00b/JmYLdrmVClpJ+f6AR7ECLCT7up1/63xhv4O1fnxqimFQ8E+4P208UewwI1VBNaFpEy9nXzrith1yrv8iIDGZ3RSAHHAhUAl2BQjxUjC8yykrmCouuEC/BYHPUCgYEA9+GghdabPd7LvKtcNrhXuXmUr7v6OuqC+VdMCz0HgmdRWVeOutRZT+ZxBxCBgLRJFnEj6EwoFhO3zwkyjMim4TwWeotUfI0o4KOuHiuzpnWRbqN/C/ohNWLx+2J6ASQ7zKTxvqhRkImog9/hWuWfBpKLZl6Ae1UlZAFMO/7PSSoEFgIUDJ9cjAz4FBYxHDqLFg5q2iDjYi0=",
+            privateKey: privateKey.trim(),
             items: orderItems
         }
 
@@ -44,7 +68,13 @@ const Checkout = () => {
                 body: JSON.stringify(order),
             });
 
-            if (res.ok) alert("Thanh toan thanh cong");
+            if (res.ok) {
+                alert("Kí thành công!");
+                navigate("/cart");
+            } else {
+                alert("Vui lòng kiểm tra lại Private Key!");
+                navigate("/user/info");
+            }
         } catch (e) {
             console.log("Error Check Out", e);
         }
@@ -99,7 +129,7 @@ const Checkout = () => {
         }
     }, [carts]);
 
-    console.log(carts);
+    // console.log(carts);
 
     const loadProvinces = async () => {
         try {
@@ -159,6 +189,48 @@ const Checkout = () => {
     return (
         <div id="check-out">
             <div className="container">
+                {/* MODAL */}
+                {
+                    showModal && (
+                        <div className="modal-overlay">
+                            <div className="modal-content">
+                                <h2>Chữ ký điện tử</h2>
+
+                                <p>Vui lòng nhập Private Key vào!</p>
+
+                                <textarea
+                                    className="private-key-input"
+                                    placeholder="Nhập Private Key tại đây..."
+                                    value={privateKey}
+                                    onChange={(e) => setPrivateKey(e.target.value)}
+                                />
+
+                                <div className="modal-actions">
+                                    <button
+                                        className="btn-cancel"
+                                        onClick={() => {
+                                            setShowModal(false);
+                                            setPrivateKey("");
+                                        }}
+                                    >
+                                        Cancel
+                                    </button>
+
+                                    <button
+                                        className="btn-confirm"
+                                        onClick={() => {
+                                            btnCheckOut();
+                                            setShowModal(false);
+                                        }}
+                                    >
+                                        Sign Order
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    )
+                }
+
                 {/* LEFT */}
                 <div className="side-left">
                     <div className="container-left">
@@ -236,7 +308,7 @@ const Checkout = () => {
                         <div className="step-checkout">
                             {/* BACK CART */}
                             <Link to={"/cart"}><div className="back-cart">Giỏ hàng</div></Link>
-                            <button className="btn-checkout" onClick={btnCheckOut}>Thanh toán</button>
+                            <button className="btn-checkout" onClick={() => setShowModal(true)}>Thanh toán</button>
                         </div>
                     </div>
                 </div>
