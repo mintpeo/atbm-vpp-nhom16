@@ -15,16 +15,15 @@ import AccountBoxs from "./rightPage/boxs/accountBoxs.jsx";
 import User from './rightPage/user/user.jsx';
 import Password from './rightPage/password/password.jsx';
 import Member from './rightPage/member/member.jsx';
+import Cart from "./rightPage/cart/cart.jsx";
 
 import {useNavigate} from "react-router-dom";
 
 const Info = () => {
-    const KEYLOGGED = KEY_LOGGED;
-    const INFOUSER = INFO_USER;
     const navigate = useNavigate();
 
     const [user] = useState(GetStoredUser);
-    const [btnPage, setBtnPage] = useState(1);
+    const [btnPage, setBtnPage] = useState(5);
 
     const Page = () => {
       switch (btnPage) {
@@ -32,6 +31,7 @@ const Info = () => {
           case 2: return <User />
           case 3: return <Password />
           case 4: return <Member />
+          case 5: return <Cart />
       }
     };
 
@@ -39,8 +39,8 @@ const Info = () => {
         <div id="info">
             <div className="container">
                 <div className="info-user">
-                    <div className="ava"><div className="user-avatar">{user.lastName.charAt(0)}{user.firstName.charAt(0)}</div></div>
-                    <div className="title"><i>Xin chào, <b>{user.lastName} {user.firstName}</b></i></div>
+                    <div className="ava"><div className="user-avatar">{user.name.charAt(0)}</div></div>
+                    <div className="title"><i>Xin chào, <b>{user.name}</b></i></div>
 
                     <div className="list-section">
                         <ul className="list-items">
@@ -81,8 +81,7 @@ const Info = () => {
                             </li>
 
                             <li className="item" onClick={() => {
-                                localStorage.removeItem(KEYLOGGED);
-                                localStorage.removeItem(INFOUSER);
+                                localStorage.clear();
                                 navigate("/");
                                 window.location.reload();
                             }}>

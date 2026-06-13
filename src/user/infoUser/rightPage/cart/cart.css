@@ -1,0 +1,125 @@
+#cart-right {
+    .container {
+        box-shadow: none;
+        padding: 0;
+        margin: 0;
+        display: block;
+
+        .modal-overlay {
+            position: fixed;
+            inset: 0;
+
+            background: rgba(0,0,0,.5);
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            z-index: 9999;
+        }
+
+        .order-detail-modal {
+            width: 900px;
+            max-width: 95%;
+
+            background: white;
+
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .modal-header {
+            padding: 16px 20px;
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            border-bottom: 1px solid #eee;
+        }
+
+        .btn-close {
+            border: none;
+            background: none;
+
+            cursor: pointer;
+            font-size: 20px;
+        }
+
+        .modal-body {
+            padding: 20px;
+        }
+
+        .detail-header,
+        .detail-row {
+            display: grid;
+            grid-template-columns:
+            1fr
+            1fr
+            1fr
+            1fr
+            1fr;
+
+            padding: 12px 0;
+        }
+
+        .detail-header {
+            font-weight: bold;
+            border-bottom: 2px solid #eee;
+        }
+
+        .detail-row {
+            border-bottom: 1px solid #f2f2f2;
+        }
+
+        .modal-footer {
+            display: flex;
+            justify-content: space-between;
+            padding: 20px;
+            border-top: 1px solid #eee;
+        }
+
+        .title {
+            color: #fb9f10;
+            font-weight: 600;
+            font-size: 1.2rem;
+            text-transform: uppercase;
+        }
+
+        .order-table {
+            margin-top: 1rem;
+            width: 100%;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            overflow: hidden;
+            background: #fff;
+        }
+
+        .order-row {
+            cursor: pointer;
+            display: grid;
+            grid-template-columns: 1.2fr 1fr 1fr 1fr 1fr;
+            align-items: center;
+            min-height: 50px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .order-row:hover {
+            background-color: #2659f3;
+        }
+
+        .order-row > div {
+            padding: 0 16px;
+        }
+
+        .order-header {
+            font-weight: 600;
+            background: #f8f8f8;
+        }
+
+        .order-empty {
+            padding: 20px 16px;
+            color: #666;
+        }
+    }
+}

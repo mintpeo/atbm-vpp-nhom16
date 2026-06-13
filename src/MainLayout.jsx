@@ -6,7 +6,7 @@ import Snowfall from "react-snowfall";
 const MainLayout = () => {
     return (
         <>
-            <Snowfall color="#82C3D9" style={{position: "fixed", zIndex: 99999}} />
+            {/*<Snowfall color="#82C3D9" style={{position: "fixed", zIndex: 99999}} />*/}
             <Navbar />
             <main className="main-content">
                 <Outlet />
