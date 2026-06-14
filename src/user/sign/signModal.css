@@ -1,0 +1,52 @@
+.modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.45);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    z-index: 9999;
+}
+
+.modal-key {
+    width: 450px;
+    background: white;
+    border-radius: 12px;
+    padding: 24px;
+}
+
+.modal-key h2 {
+    margin-bottom: 12px;
+}
+
+.option-group {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+
+    margin: 20px 0;
+}
+
+.option-group label {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    cursor: pointer;
+}
+
+.modal-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+}
+
+.btn-cancel {
+    padding: 10px 18px;
+}
+
+.btn-confirm {
+    padding: 10px 18px;
+}

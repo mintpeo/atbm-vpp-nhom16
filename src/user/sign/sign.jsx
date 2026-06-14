@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import './sign.css'
+import './signModal.css'
 import {API_URL_BE, INFO_USER, KEY_LOGGED} from "../../service/API_URL.jsx";
 
 import {FaGoogle} from "react-icons/fa6";
@@ -17,6 +18,10 @@ const Sign = () => {
     const [firstName, setFirstName] = useState("");
     const [phone, setPhone] = useState("");
     const [isLoading, setIsLoading] = useState(false);
+    const [showKeyModal, setShowKeyModal] = useState(false);
+    const [sendFile, setSendFile] = useState(true);
+    const [sendEmail, setSendEmail] = useState(false);
+    const [privateKey, setPrivateKey] = useState("");
 
     const sign = async (e) => {
         e.preventDefault();
@@ -51,31 +56,127 @@ const Sign = () => {
                 },
                 body: JSON.stringify(newUser),
             });
+            const data = await res.json();
+            if (data.privateKey) {
+                setShowKeyModal(true);
+                setPrivateKey(data.privateKey);
+            }
 
             setIsLoading(false);
-
-            if (res.ok) {
-                const resLogin = await fetch(`${API_URL_BE}/user/login`, {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json",
-                    },
-                    body: JSON.stringify(newUser),
-                });
-                const user = await resLogin.json();
-                localStorage.setItem(KEY_LOGGED, "true");
-                localStorage.setItem(INFO_USER, JSON.stringify(user));
-                alert("Đăng ký thành công.");
-                navigate("/");
-            }
         } catch (error) {
             console.log("Error SignUp: ", error);
         }
     };
 
+    // Handle Modal Private Key
+    const handlePrivateKeyOption = async () => {
+        if (sendFile) {
+            downloadPrivateKey(privateKey);
+        }
+
+        const send = {
+            email: email,
+            privateKey: privateKey,
+        }
+
+        if (sendEmail) {
+            await fetch(`${API_URL_BE}/user/send`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(send),
+            });
+        }
+
+        setShowKeyModal(false);
+        alert("Private key delivered successfully.");
+
+        const login = {
+            email: email,
+            password: password,
+        };
+
+        const resLogin = await fetch(`${API_URL_BE}/user/login`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(login),
+        });
+        const user = await resLogin.json();
+        localStorage.setItem(KEY_LOGGED, "true");
+        localStorage.setItem(INFO_USER, JSON.stringify(user));
+        alert("Đăng ký thành công.");
+        navigate("/");
+    };
+
+    // Down File
+    const downloadPrivateKey = (privateKey) => {
+        const blob = new Blob(
+            [privateKey],
+            { type: "text/plain" }
+        );
+
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement("a");
+
+        a.href = url;
+        a.download = "private-key.txt";
+
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+
+        URL.revokeObjectURL(url);
+    };
+
     return (
         <div id="sign">
             <LoadingModal isOpen={isLoading}/>
+            {showKeyModal && (
+                <div className="modal-overlay">
+                    <div className="modal-key">
+                        <h2>Private Key Delivery</h2>
+
+                        <p>Choose how you want to receive your private key:</p>
+
+                        <div className="option-group">
+                            <label>
+                                <input
+                                    type="checkbox"
+                                    checked={sendFile}
+                                    onChange={(e) =>
+                                        setSendFile(e.target.checked)
+                                    }
+                                />
+                                Download Private Key File
+                            </label>
+
+                            <label>
+                                <input
+                                    type="checkbox"
+                                    checked={sendEmail}
+                                    onChange={(e) =>
+                                        setSendEmail(e.target.checked)
+                                    }
+                                />
+                                Send Private Key To Email
+                            </label>
+                        </div>
+
+                        <div className="modal-actions">
+                            <button
+                                className="btn-confirm"
+                                onClick={handlePrivateKeyOption}
+                                disabled={!sendFile && !sendEmail}
+                            >
+                                Confirm
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            )}
             <div className="container">
                 <form className="table-login" onSubmit={sign}>
                     <div className="title">Đăng ký</div>

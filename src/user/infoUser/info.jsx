@@ -39,7 +39,7 @@ const Info = () => {
         <div id="info">
             <div className="container">
                 <div className="info-user">
-                    <div className="ava"><div className="user-avatar">{user.name.charAt(0)}</div></div>
+                    <div className="ava"><div className="user-avatar">{user.name?.charAt(0)}</div></div>
                     <div className="title"><i>Xin chào, <b>{user.name}</b></i></div>
 
                     <div className="list-section">

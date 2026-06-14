@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react';
 import "./cart.css"
 import {API_URL_BE} from "../../../../service/API_URL.jsx";
 import {GetStoredUser} from "../../../../service/GetStoredUser.jsx";
+import {data} from "react-router-dom";
 
 const Cart = () => {
     const [user] = useState(GetStoredUser);
@@ -64,15 +65,32 @@ const Cart = () => {
                 },
                 body: JSON.stringify(signa)
             });
+            const data = await res.json();
+            console.log(data)
 
             if (res.ok) {
-                alert("Thanh cong");
-                setShowModal(false);
-                window.location.reload();
-            } else alert("That bai")
+                if (data) {
+                    alert("Kí thành công!");
+                    setShowModal(false);
+                    window.location.reload();
+                }
+            } else alert("Vui lòng kiểm tra lại Private Key!")
         } catch (e) {
             console.log("Error Verify Again", e);
         }
+    };
+
+    const handleFile = (e) => {
+        const file = e.target.files[0];
+        if (!file) return;
+
+        const reader = new FileReader();
+        reader.onload = (event) => {
+            const privateKey = event.target.result;
+            setPrivateKey(privateKey);
+        };
+
+        reader.readAsText(file);
     };
 
     return (
@@ -84,13 +102,14 @@ const Cart = () => {
                         <div className="modal-overlay">
                             <div className="order-detail-modal">
                                 <div className="modal-header">
-                                    <h2>Order Detail #{selectedOrder}</h2>
+                                    <h2>Mã đơn hàng #{selectedOrder}</h2>
 
                                     <button
                                         className="btn-close"
                                         onClick={() => {
                                             setShowModal(false);
                                             setOrderItems([]);
+                                            setPrivateKey("");
                                         }}
                                     >✕</button>
                                 </div>
@@ -130,7 +149,10 @@ const Cart = () => {
                                                     value={privateKey}
                                                     onChange={(e) => setPrivateKey(e.target.value)}
                                                     cols="30" rows="1"></textarea>
-                                                <button onClick={() => verifySignatureAgain(selectedOrder)} className="verify">Verify</button>
+                                                <div className="text-btn">
+                                                    <input type="file" accept=".key,.txt" onChange={handleFile} />
+                                                    <button onClick={() => verifySignatureAgain(selectedOrder)} className="verify">Verify</button>
+                                                </div>
                                             </div>
                                         )}
                                     </div>
@@ -158,14 +180,14 @@ const Cart = () => {
                     </div>
 
                     {orders.length > 0 ? (
-                        orders.map(item => (
+                        orders.sort((a, b) => b.id - a.id).map(item => (
                             <div onClick={() => {
                                 setShowModal(true);
                                 openOrderDetail(item.id);
                                 setVerify(item.verify);
-                            }} className="order-row" key={item.id}>
+                            }} className={item.verify? `order-row` : `order-row order-fail`} key={item.id}>
                                 <div>{item.id}</div>
-                                <div>{item.createdAt}</div>
+                                <div style={{width: "200px"}}>{item.createdAt}</div>
                                 <div>{item.totalPrice.toLocaleString()}₫</div>
                                 <div>{item.verify? "Thành công" : "Thất bại"}</div>
                             </div>

@@ -70,11 +70,10 @@ const Checkout = () => {
 
             if (res.ok) {
                 alert("Kí thành công!");
-                navigate("/cart");
             } else {
                 alert("Vui lòng kiểm tra lại Private Key!");
-                navigate("/user/info");
             }
+            navigate("/user/info");
         } catch (e) {
             console.log("Error Check Out", e);
         }
@@ -179,6 +178,19 @@ const Checkout = () => {
         return total.toLocaleString() + " " + stringCur;
     };
 
+    const handleFile = (e) => {
+        const file = e.target.files[0];
+        if (!file) return;
+
+        const reader = new FileReader();
+        reader.onload = (event) => {
+            const privateKey = event.target.result;
+            setPrivateKey(privateKey);
+        };
+
+        reader.readAsText(file);
+    };
+
     useEffect(() => {
         loadCarts();
         loadProvinces();
@@ -206,6 +218,8 @@ const Checkout = () => {
                                 />
 
                                 <div className="modal-actions">
+                                    <input type="file" accept=".key,.txt" onChange={handleFile} />
+
                                     <button
                                         className="btn-cancel"
                                         onClick={() => {
@@ -213,7 +227,7 @@ const Checkout = () => {
                                             setPrivateKey("");
                                         }}
                                     >
-                                        Cancel
+                                        Huỷ
                                     </button>
 
                                     <button
@@ -223,7 +237,7 @@ const Checkout = () => {
                                             setShowModal(false);
                                         }}
                                     >
-                                        Sign Order
+                                        Kí
                                     </button>
                                 </div>
                             </div>
