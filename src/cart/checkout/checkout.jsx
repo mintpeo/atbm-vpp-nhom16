@@ -25,25 +25,8 @@ const Checkout = () => {
     const [districts, setDistricts] = useState([]);
     const [wards, setWards] = useState([]);
 
-    // Verify private key
-    const verify = async (orderId) => {
-        try {
-            const res = await fetch(`${API_URL_BE}/signature/verify`, {
-                method: "Post",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify({
-                    "orderId": orderId
-                })
-            });
-            const data = await res.json();
-            if (data) alert("TRUE");
-            else alert("False");
-        } catch (e) {
-            console.log("Error Verify Order", e);
-        }
-    }
+    const [orderText, setOrderText] = useState("");
+    const [signText, setSignText] = useState("");
 
     // Btn CheckOut
     const btnCheckOut = async () => {
@@ -127,8 +110,6 @@ const Checkout = () => {
             fetchProducts();
         }
     }, [carts]);
-
-    // console.log(carts);
 
     const loadProvinces = async () => {
         try {

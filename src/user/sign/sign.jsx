@@ -137,9 +137,8 @@ const Sign = () => {
             {showKeyModal && (
                 <div className="modal-overlay">
                     <div className="modal-key">
-                        <h2>Private Key Delivery</h2>
-
-                        <p>Choose how you want to receive your private key:</p>
+                        <h2>Private Key</h2>
+                        <p>Bạn muốn nhận Private Key như nào?</p>
 
                         <div className="option-group">
                             <label>
@@ -150,7 +149,7 @@ const Sign = () => {
                                         setSendFile(e.target.checked)
                                     }
                                 />
-                                Download Private Key File
+                                Lưu về máy.
                             </label>
 
                             <label>
@@ -161,7 +160,7 @@ const Sign = () => {
                                         setSendEmail(e.target.checked)
                                     }
                                 />
-                                Send Private Key To Email
+                                Gửi qua Mail: {email}
                             </label>
                         </div>
 
@@ -171,7 +170,7 @@ const Sign = () => {
                                 onClick={handlePrivateKeyOption}
                                 disabled={!sendFile && !sendEmail}
                             >
-                                Confirm
+                                Xác nhận
                             </button>
                         </div>
                     </div>

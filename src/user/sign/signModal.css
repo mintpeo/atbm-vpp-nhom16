@@ -17,6 +17,10 @@
     padding: 24px;
 }
 
+.modal-key > h2 {
+    text-align: center;
+}
+
 .modal-key h2 {
     margin-bottom: 12px;
 }
