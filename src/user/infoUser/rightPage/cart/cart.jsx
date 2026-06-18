@@ -12,6 +12,8 @@ const Cart = () => {
     const [orderItems, setOrderItems] = useState([]);
     const [verify, setVerify] = useState(false);
     const [privateKey, setPrivateKey] = useState("");
+    const [orderText, setOrderText] = useState("");
+    const [signText, setSignText] = useState("");
 
     const loadOrders = async () => {
         try {
@@ -46,6 +48,64 @@ const Cart = () => {
             setShowModal(true);
         } catch (e) {
             console.log("Error Order Detail", e);
+        }
+    };
+
+    // Signature By Tool
+    const signByTool = async (orderId) => {
+        const signa = {
+            userId: user.id,
+            orderId: orderId,
+            signText: signText,
+            orderText: orderText
+        }
+
+        try {
+            const res = await fetch(`${API_URL_BE}/signature/tool`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(signa)
+            });
+            const data = await res.json();
+            console.log(data)
+
+            if (res.ok) {
+                if (data) {
+                    alert("Kí thành công!");
+                    setShowModal(false);
+                    window.location.reload();
+                }
+            } else alert("Vui lòng kiểm tra lại Private Key!")
+        } catch (e) {
+            console.log("Error Sign By Tool", e);
+        }
+    };
+
+    const handleOrderText = async (orderId) => {
+        const signa = {
+            userId: user.id,
+            orderId: orderId,
+            privateKey: ""
+        }
+
+        try {
+            const res = await fetch(`${API_URL_BE}/signature/orderText`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(signa)
+            });
+            const data = await res.json();
+            console.log(data)
+
+            if (res.ok) {
+                setOrderText(JSON.stringify(data));
+            }
+        } catch (e) {
+            console.log("Error Order Text", e);
         }
     };
 
@@ -120,7 +180,7 @@ const Cart = () => {
                                         <div>Loại</div>
                                         <div>Giá</div>
                                         <div>Số lượng</div>
-                                        <div>Tổng</div>
+                                        <div>Thành tiền</div>
                                     </div>
 
                                     {
@@ -153,12 +213,31 @@ const Cart = () => {
                                                     <input type="file" accept=".key,.txt" onChange={handleFile} />
                                                     <button onClick={() => verifySignatureAgain(selectedOrder)} className="verify">Verify</button>
                                                 </div>
+
+                                                <textarea
+                                                    className="private-key-input"
+                                                    placeholder="Mã Order"
+                                                    value={orderText}
+                                                    onChange={(e) => setOrderText(e.target.value)}
+                                                    cols="10" rows="1"
+                                                    style={{height: "100px"}}></textarea>
+                                                <textarea
+                                                    className="private-key-input"
+                                                    placeholder="Mã Signature"
+                                                    value={signText}
+                                                    onChange={(e) => setSignText(e.target.value)}
+                                                    cols="10" rows="1"
+                                                    style={{height: "100px"}}></textarea>
+                                                <div className="text-btn">
+                                                    <button onClick={() => handleOrderText(selectedOrder)} className="verify">Create Order Text</button>
+                                                    <button onClick={() => signByTool(selectedOrder)} className="verify">Sign By Tool</button>
+                                                </div>
                                             </div>
                                         )}
                                     </div>
 
                                         <h3>
-                                            Thành tiền:
+                                            Tổng:
                                         {orderItems.reduce((sum, item) =>
                                                         sum + item.price * item.quantity, 0)
                                             .toLocaleString()}₫

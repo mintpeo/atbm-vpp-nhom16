@@ -59,7 +59,7 @@ const Cart = () => {
         }
     }, [carts]);
 
-    console.log(carts);
+    // console.log(carts);
 
     // Selected Item
     const toggleSelectItem = (id) => {
